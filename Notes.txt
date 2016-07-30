@@ -1,0 +1,1 @@
+- [ ] Make the standard size of a map either 240 or 360 pixels
