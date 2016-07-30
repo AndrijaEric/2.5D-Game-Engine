@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 
 public class Player : MonoBehaviour {
@@ -47,9 +48,49 @@ public class Player : MonoBehaviour {
         //Firing
         if (Input.GetMouseButtonDown(0))
         {
+            Vector2 Click_Direction = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - this.transform.position);
+            //Make sure that the x value doesn't go out of the [+-1,+-4] range
+            if (Click_Direction.x < 1 && Click_Direction.x > 0)
+            {
+                Click_Direction.x = 1;
+            }
+            else if (Click_Direction.x > 4)
+            {
+                Click_Direction.x = 4;
+            }
+
+            if (Click_Direction.x > -1 && Click_Direction.x < 0)
+            {
+                Click_Direction.x = -1;
+            }
+            else if (Click_Direction.x < - 4)
+            {
+                Click_Direction.x = -4;
+            }
+            //Make sure that the y value doesn't go out of the [+-1,+-4] range
+            if (Click_Direction.y < 1 && Click_Direction.y > 0)
+            {
+                Click_Direction.y = 1;
+            }
+            else if (Click_Direction.y > 4)
+            {
+                Click_Direction.y = 4;
+            }
+
+            if (Click_Direction.y > -1 && Click_Direction.y < 0)
+            {
+                Click_Direction.y = -1;
+            }
+            else if (Click_Direction.y < -4)
+            {
+                Click_Direction.y = -4;
+            }
+
+
             GameObject Orb_Spawn = Instantiate(Orb, this.transform.position, Quaternion.identity) as GameObject;
-            Orb_Spawn.GetComponent<Rigidbody2D>().AddForce(Vector2.up * shootSpeed, ForceMode2D.Force);
+            Orb_Spawn.GetComponent<Rigidbody2D>().AddForce(Click_Direction /7 * shootSpeed, ForceMode2D.Force);
             Orb_Spawn = null;
+            Debug.Log(Click_Direction);
         }
     }
 }

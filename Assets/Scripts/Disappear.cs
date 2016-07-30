@@ -7,7 +7,7 @@ public class Disappear : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        lifeTime = 1.5F;
+        lifeTime = 2F;
     }
 	
 	// Update is called once per frame
